@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>测试6</title>
+    <script src="./js/Promise6.js"></script>
+  </head>
+  <body>
+<script>
+
+new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        console.log('步骤一：执行');
+        reject('1');
+    },500);
+}).then(function(val){
+    console.log('步骤二成功打印参数'+val);//1
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            console.log('步骤二：执行');
+            resolve('2');
+        },100);
+    });
+},function(val){
+  console.log('步骤二失败打印参数'+val);
+  return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+          console.log('步骤二：失败');
+          resolve('2');
+      },100);
+  });
+}).then(function(val){
+  console.log("成功"+val+'参数');
+},function (val) {
+  console.log('失败'+val+'参数');
+});
+
+
+</script>
+  </body>
+</html>
